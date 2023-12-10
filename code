@@ -1,0 +1,76 @@
+프로세싱
+
+import processing.net.*;
+import processing.serial.*;
+
+Serial p;
+Server s;
+Client c;
+
+void setup() {
+  p = new Serial(this, "COM12", 9600);
+  s = new Server(this, 12345);
+}
+
+void draw() {
+  c = s.available();
+  if (c != null) {
+    String m = c.readString();
+    m = m.substring(m.length() - 1);
+    p.write(m);
+  }
+}
+void keyPressed(){
+  background(0);
+  textSize(64);
+  text(key, 30, 70);
+  p.write(key);
+}
+
+아두이노
+
+int myNote[] = {0, 523, 587, 659, 698, 784, 880, 987, 1046};
+void setup() {
+  Serial.begin(9600);
+
+}
+char b;
+void loop() {
+  if (Serial.available() > 0) {
+    b = Serial.read();
+
+    Serial.println(b);
+    if (b == '1') {
+      tone(4, myNote[1], 500);
+      delay(500);
+    }
+    if (b == '2') {
+      tone(4, myNote[2], 500);
+      delay(500);
+    }
+    if (b == '3') {
+      tone(4, myNote[3], 500);
+      delay(500);
+    }
+    if (b == '4') {
+      tone(4, myNote[4], 500);
+      delay(500);
+    }
+    if (b == '5') {
+      tone(4, myNote[5], 500);
+      delay(500);
+    }
+    if (b == '6') {
+      tone(4, myNote[6], 500);
+      delay(500);
+    }
+    if (b == '7') {
+      tone(4, myNote[7], 500);
+      delay(500);
+    }
+     if (b == '8') {
+      tone(4, myNote[8], 500);
+      delay(500);
+    }  
+  }
+}
